@@ -39,10 +39,11 @@ void communicate(int sockfd)
 
 int main()
 {
-    int sockfd, connfd, len;
+    int sockfd, connfd;
+    socklen_t len;
     struct sockaddr_in servaddr, cli;
     unsigned int **taddress;
-    taddress = malloc(sizeof(unsigned int *) * 4);
+    taddress = (unsigned int **)malloc(sizeof(unsigned int *) * 4);
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1)
     {
@@ -74,8 +75,8 @@ int main()
         printf("Server listening...\n");
     len = sizeof(cli);
 
-    tableAddress(taddress);
-    printf("\nT-table addresses sent...\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", taddress[0], taddress[1], taddress[2], taddress[3]);
+    //tableAddress(taddress);
+    //printf("\nT-table addresses sent...\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", taddress[0], taddress[1], taddress[2], taddress[3]);
 
     connfd = accept(sockfd, (SA *)&cli, &len);
     if (connfd < 0)
@@ -87,7 +88,7 @@ int main()
         printf("Server accept the client...\n");
 
     //Sending t-table addresses to the client
-    write(connfd, taddress, sizeof(unsigned int *) * 4);
+    //write(connfd, taddress, sizeof(unsigned int *) * 4);
 
     //function for sending ciphertext to the client
     communicate(connfd);
