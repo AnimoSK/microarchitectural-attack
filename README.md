@@ -1,6 +1,6 @@
 # SummerProject
 
-Attack on a client-server scenario
+Flush-Reload Attack on AES' T-table implementation in a client-server scenario
 
 ### Server:
 
