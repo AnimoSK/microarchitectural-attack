@@ -30,7 +30,7 @@ Flush-Reload Attack on AES' T-table implementation in a client-server scenario
 
 - ./calibration
 
-[*Change the MIN_CACHE_MISS_CYCELS value accordingly in the client.c file*]
+[*Change the MIN_CACHE_MISS_CYCLES value accordingly in the client.c file*]
 
 - gcc -o client client.c
 
