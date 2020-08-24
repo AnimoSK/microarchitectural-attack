@@ -3,8 +3,6 @@
 
 void aesEncrypt(unsigned int *, unsigned int *, unsigned int *);
 
-void tableAddress(unsigned int **);
-
 void convertKey(unsigned int *, int);
 
 void addKey(int **, int **);

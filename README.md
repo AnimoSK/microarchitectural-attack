@@ -1,8 +1,8 @@
 # SummerProject
 
-Flush-Reload attack
+Attack on a client-server scenario
 
-## Server Steps:
+### Server:
 
 - gcc -c -Wall -Werror -fpic encrypt.c
 
@@ -24,7 +24,13 @@ Flush-Reload attack
 
 - ./server
 
-## Client Steps:
+### Client:
+
+- gcc calibration.c -o calibration
+
+- ./calibration
+
+[*Change the MIN_CACHE_MISS_CYCELS value accordingly in the client.c file*]
 
 - gcc -o client client.c
 
