@@ -1,8 +1,8 @@
 # SummerProject
 
-Flush-Reload attack
+Attack on a client-server scenario
 
-## Server Steps:
+### Server Steps:
 
 - gcc -c -Wall -Werror -fpic encrypt.c
 
@@ -24,7 +24,7 @@ Flush-Reload attack
 
 - ./server
 
-## Client Steps:
+### Client Steps:
 
 - gcc -o client client.c
 
