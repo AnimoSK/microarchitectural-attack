@@ -8,11 +8,9 @@ Attack on a client-server scenario
 
 - gcc -shared -o libencrypt.so encrypt.o
 
-- readelf -a libencrypt.so > encrypt.txt
+- nm libencrypt.so | grep Te[0-4]
 
-- vi encrypt.txt
-
-[*Type /Te0 and note the offset addresses of T-tables and replace the values in probe array in client.c*]
+[To get the t-table addresses and replace the value in probe array in client.c accordingly]
 
 - gcc server.c -L/mnt/c/Users/Satyaki/Desktop/SummerProject/ -lencrypt -o server
 

