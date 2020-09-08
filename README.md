@@ -9,7 +9,7 @@ Flush-Reload Attack on AES' T-table implementation.
 
 - ./calibration
 
-[*Change the MIN_CACHE_MISS_CYCLES value accordingly in the client.c file*]
+[*Change the MIN_CACHE_MISS_CYCLES value accordingly in the client.c (attack.c if attack is performed in a normal environment) file*]
 
 - gcc -c -Wall -Werror -fpic encrypt.c
 
