@@ -10,7 +10,7 @@ Flush-Reload Attack on AES' T-table implementation in a client-server scenario
 
 - nm libencrypt.so | grep Te[0-4]
 
-[To get the t-table addresses and replace the value in probe array in client.c accordingly]
+[*To get the t-table addresses and replace the values in probe array in client.c accordingly*]
 
 - gcc server.c -L/mnt/c/Users/Satyaki/Desktop/SummerProject/ -lencrypt -o server
 
