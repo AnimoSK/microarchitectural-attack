@@ -1,4 +1,4 @@
-# SummerProject
+# Microarchitectural Attack
 
 Flush-Reload Attack on AES' T-table implementation.
 [*Note: In order to perform the attack in a normal environment follow just the server steps and replace server.c with attack.c file in the steps where needed accordingly*]
